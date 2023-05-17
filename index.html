@@ -20,7 +20,7 @@
     </script>
 </head>
 
-<body class="" style="visibility: hidden;">
+<body>
 
 <section id="top_sect" class="second">
     <p>window.location:</p>
@@ -95,10 +95,6 @@
         document.getElementById('theme_data').innerHTML = JSON.stringify(Telegram.WebApp.themeParams, null, 2);
     });
 
-    if (DemoApp.initDataUnsafe.query_id) {
-        document.getElementById('main_btn').style.display = 'block';
-    }
-
     document.getElementById('webview_data').innerHTML = JSON.stringify(DemoApp.initDataUnsafe, null, 2);
     document.getElementById('theme_data').innerHTML = JSON.stringify(Telegram.WebApp.themeParams, null, 2);
 
@@ -111,6 +107,8 @@
     document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
 
     document.getElementById('window_location').innerHTML = window.location.toString();
+
+    console.log('###', window.location, Telegram.WebApp.initData, Telegram.WebApp.initDataUnsafe);
 </script>
 
 </body>
