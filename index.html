@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -11,15 +11,7 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="robots" content="noindex,nofollow" />
     <title></title>
-    <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
-
-    <script>
-      function setThemeClass() {
-        document.documentElement.className = Telegram.WebApp.colorScheme;
-      }
-      Telegram.WebApp.onEvent("themeChanged", setThemeClass);
-      setThemeClass();
-    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <link
       rel="stylesheet"
@@ -33,114 +25,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
     />
-
-    <style>
-      body {
-        background-color: var(--bg-color);
-      }
-      tbody {
-        width: 100%;
-        display: table;
-      }
-      .button.button-outline {
-        color: var(--tg-theme-button-color);
-      }
-      .button {
-        line-height: 1.8rem;
-        height: auto;
-        padding: 0 1rem;
-        border: 0.1rem solid var(--tg-theme-button-color);
-      }
-      .table-container {
-        padding: 2rem;
-      }
-      td,
-      th {
-        padding: 0.8rem;
-      }
-      .description {
-        margin: 0;
-        font-size: 0.9em;
-        font-weight: normal;
-      }
-      .center {
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="light.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="table-container">
-      <div id="schedule-table"></div>
+      <div id="booking-table"></div>
     </div>
+    <script type="module" src="main.js"></script>
   </body>
-  <script type="module">
-    import { h, Component, render } from "https://esm.sh/preact";
-    import htm from "https://esm.sh/htm";
-
-    const html = htm.bind(h);
-
-    const input = {
-      schedules: [
-        ["09:00", "13:00"],
-        ["13:00", "17:00"],
-        ["17:00", "21:00"],
-      ],
-      gazebo: [
-        ["0", "Альтанка 1", "відкрита, 6 чол", [false, false, true]],
-        ["1", "Альтанка 2", "заскляна, 6 чол", [true, true, true]],
-        ["2", "Альтанка 3", "відкрита, 6 чол", [true, false, true]],
-        ["3", "Альтанка 4", "відкрита, 6 чол", [false, false, false]],
-        ["4", "Альтанка 5", "відкрита, 6 чол", [true, true, false]],
-        ["5", "Альтанка 6", "відкрита, 6 чол", [true, true, true]],
-        ["6", "Альтанка 7", "відкрита, 6 чол", [true, false, false]],
-        ["7", "Альтанка 8", "відкрита, 6 чол", [true, true, true]],
-        ["8", "Альтанка 9", "відкрита, 6 чол", [false, false, true]],
-        ["9", "Альтанка 10", "відкрита, 6 чол", [true, true, true]],
-      ],
-    };
-
-    const gazebos = input.gazebo.map((option) => {
-      return {
-        id: option[0],
-        title: option[1],
-        subTitle: option[2],
-        scheduleOptions: option[3].map((isAvailable, i) =>
-          isAvailable ? input.schedules[i] : null
-        ),
-      };
-    });
-
-    function ScheduleOption(scheduleOption) {
-      if (!scheduleOption) return html`<td class="center">-</td>`;
-
-      return html`<td class="center">
-        <a class="button button-outline"
-          >${scheduleOption[0]}<br />${scheduleOption[1]}</a
-        >
-      </td>`;
-    }
-
-    function GazeboRow({ id, title, subTitle, scheduleOptions }) {
-      return html`<tr>
-        <th>
-          ${title}
-          <p class="description">${subTitle}</p>
-        </th>
-        ${scheduleOptions.map(ScheduleOption)}
-      </tr>`;
-    }
-
-    function Table() {
-      return html`<table>
-        <tbody>
-          ${gazebos.map((gazebo) => GazeboRow(gazebo))}
-        </tbody>
-      </table>`;
-    }
-
-    const app = html`<${Table} />`;
-
-    render(app, document.getElementById("schedule-table"));
-  </script>
 </html>
